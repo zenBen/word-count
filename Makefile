@@ -16,15 +16,15 @@ all: $(OBJS)
 .PRECIOUS: $(TMPDIR)/%.dat
 
 $(TMPDIR)/%.dat: $(SRCDIR)/%.txt
-	python source/wordcount.py $<  $@
+	./source/wordcount.py $<  $@
 
 $(PLTDIR)/%.png: $(TMPDIR)/%.dat
-	python source/plotcount.py $<  $@
+	./source/plotcount.py $<  $@
 
 results.txt: $(DATA)
 	@echo $@ $^
 	@echo $(DATA)
-	python source/zipf_test.py $^ > $@
+	./source/zipf_test.py $^ > $@
 
 #Make the Directories
 directories:

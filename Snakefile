@@ -30,7 +30,7 @@ rule count_words:
     shell:
         '''
         echo "Running {input.wc} with {threads} cores on {input.book}." &> {log} &&
-            python {input.wc} {input.book} {output} >> {log} 2>&1
+            ./{input.wc} {input.book} {output} >> {log} 2>&1
         '''
 
 # create a plot for each book
@@ -40,7 +40,7 @@ rule make_plot:
         book='data/{file}.dat'
     output: 'plots/{file}.png'
     resources: gpu=1
-    shell: 'python {input.plotcount} {input.book} {output}'
+    shell: './{input.plotcount} {input.book} {output}'
 
 # generate summary table
 rule zipf_test:
@@ -48,7 +48,7 @@ rule zipf_test:
         zipf='source/zipf_test.py',
         books=expand('data/{book}.dat', book=DATA)
     output: 'results.txt'
-    shell:  'python {input.zipf} {input.books} > {output}'
+    shell:  './{input.zipf} {input.books} > {output}'
 
 # create an archive with all of our results
 rule make_archive:
