@@ -1,0 +1,14 @@
+# Build both steps required for executing the character count example
+all: data/abyss.dat plots/abyss.png results.txt
+
+#Count words (Step 1)
+data/abyss.dat: books/abyss.txt
+	python source/wordcount.py books/abyss.txt data/abyss.dat
+
+#Create Bar chart (Step 2)
+plots/abyss.png: data/abyss.dat
+	python source/plotcount.py data/abyss.dat plots/abyss.png
+
+results.txt: data/abyss.dat
+	python source/zipf_test.py data/abyss.dat > results.txt
+
