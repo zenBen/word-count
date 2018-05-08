@@ -1,5 +1,5 @@
-SRCDIR := books
-TMPDIR := data
+SRCDIR := data
+TMPDIR := processed_data
 RESDIR := results
 
 SRCS = $(wildcard $(SRCDIR)/*.txt)

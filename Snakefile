@@ -2,7 +2,7 @@
 # to run the instructor's copy.
 
 # our zipf analysis pipeline
-DATA = glob_wildcards('books/{book}.txt').book
+DATA = glob_wildcards('data/{book}.txt').book
 
 localrules: all, clean, make_archive
 
@@ -15,7 +15,7 @@ rule all:
 rule clean:
     shell:  
         '''
-        rm -rf data results source/__pycache__
+        rm -rf processed_data results source/__pycache__
         rm -f zipf_analysis.tar.gz 
         '''
 
@@ -23,10 +23,10 @@ rule clean:
 rule count_words:
     input:  
         wc='source/wordcount.py',
-        book='books/{file}.txt'
-    output: 'data/{file}.dat'
+        book='data/{file}.txt'
+    output: 'processed_data/{file}.dat'
     threads: 4
-    log: 'data/{file}.log'
+    log: 'processed_data/{file}.log'
     shell:
         '''
         echo "Running {input.wc} with {threads} cores on {input.book}." &> {log} &&
@@ -37,7 +37,7 @@ rule count_words:
 rule make_plot:
     input:
         plotcount='source/plotcount.py',
-        book='data/{file}.dat'
+        book='processed_data/{file}.dat'
     output: 'results/{file}.png'
     resources: gpu=1
     shell: './{input.plotcount} {input.book} {output}'
@@ -46,7 +46,7 @@ rule make_plot:
 rule zipf_test:
     input:  
         zipf='source/zipf_test.py',
-        books=expand('data/{book}.dat', book=DATA)
+        books=expand('processed_data/{book}.dat', book=DATA)
     output: 'results/results.txt'
     shell:  './{input.zipf} {input.books} > {output}'
 
@@ -54,7 +54,7 @@ rule zipf_test:
 rule make_archive:
     input:
         expand('results/{book}.png', book=DATA),
-        expand('data/{book}.dat', book=DATA),
+        expand('processed_data/{book}.dat', book=DATA),
         'results/results.txt'
     output: 'zipf_analysis.tar.gz'
     shell: 'tar -czvf {output} {input}'
