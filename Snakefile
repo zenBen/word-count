@@ -15,7 +15,7 @@ rule all:
 rule clean:
     shell:  
         '''
-        rm -rf results data plots __pycache__
+        rm -rf results data plots results __pycache__
         rm -f results.txt zipf_analysis.tar.gz *.out *.log *.pyc
         '''
 
@@ -47,7 +47,7 @@ rule zipf_test:
     input:  
         zipf='source/zipf_test.py',
         books=expand('data/{book}.dat', book=DATA)
-    output: 'results.txt'
+    output: 'results/results.txt'
     shell:  './{input.zipf} {input.books} > {output}'
 
 # create an archive with all of our results
@@ -55,7 +55,7 @@ rule make_archive:
     input:
         expand('plots/{book}.png', book=DATA),
         expand('data/{book}.dat', book=DATA),
-        'results.txt'
+        'results/results.txt'
     output: 'zipf_analysis.tar.gz'
     shell: 'tar -czvf {output} {input}'
 
