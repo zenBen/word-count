@@ -15,8 +15,8 @@ rule all:
 rule clean:
     shell:  
         '''
-        rm -rf processed_data results source/__pycache__
-        rm -f zipf_analysis.tar.gz 
+        rm -rf source/__pycache__
+        rm -f zipf_analysis.tar.gz processed_data/* results/* 
         '''
 
 # count words in one of our "books"

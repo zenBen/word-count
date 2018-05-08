@@ -29,7 +29,7 @@ directories:
 
 #Clean only Objecst
 clean:
-	@$(RM) -rf $(TMPDIR)
-	@$(RM) -rf $(RESDIR)
+	@$(RM) $(TMPDIR)/*
+	@$(RM) $(RESDIR)/*
 
 .PHONY: clean directories
