@@ -15,8 +15,8 @@ rule all:
 rule clean:
     shell:  
         '''
-        rm -rf results data plots results __pycache__
-        rm -f results.txt zipf_analysis.tar.gz *.out *.log *.pyc
+        rm -rf data results source/__pycache__
+        rm -f zipf_analysis.tar.gz 
         '''
 
 # count words in one of our "books"
@@ -38,7 +38,7 @@ rule make_plot:
     input:
         plotcount='source/plotcount.py',
         book='data/{file}.dat'
-    output: 'plots/{file}.png'
+    output: 'results/{file}.png'
     resources: gpu=1
     shell: './{input.plotcount} {input.book} {output}'
 
@@ -53,7 +53,7 @@ rule zipf_test:
 # create an archive with all of our results
 rule make_archive:
     input:
-        expand('plots/{book}.png', book=DATA),
+        expand('results/{book}.png', book=DATA),
         expand('data/{book}.dat', book=DATA),
         'results/results.txt'
     output: 'zipf_analysis.tar.gz'

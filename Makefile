@@ -1,14 +1,11 @@
-print-%  : ; @echo $* = $($*)
-
 SRCDIR := books
 TMPDIR := data
-PLTDIR := plots
 RESDIR := results
 
 SRCS = $(wildcard $(SRCDIR)/*.txt)
 
 OBJS = $(patsubst $(SRCDIR)/%.txt,$(TMPDIR)/%.dat,$(SRCS))
-OBJS += $(patsubst $(SRCDIR)/%.txt,$(PLTDIR)/%.png,$(SRCS))
+OBJS += $(patsubst $(SRCDIR)/%.txt,$(RESDIR)/%.png,$(SRCS))
 OBJS += $(RESDIR)/results.txt
 DATA = $(patsubst $(SRCDIR)/%.txt,$(TMPDIR)/%.dat,$(SRCS))
 
@@ -19,7 +16,7 @@ all: $(OBJS)
 $(TMPDIR)/%.dat: $(SRCDIR)/%.txt
 	./source/wordcount.py $<  $@
 
-$(PLTDIR)/%.png: $(TMPDIR)/%.dat
+$(RESDIR)/%.png: $(TMPDIR)/%.dat
 	./source/plotcount.py $<  $@
 
 $(RESDIR)/results.txt: $(DATA)
@@ -28,13 +25,11 @@ $(RESDIR)/results.txt: $(DATA)
 #Make the Directories
 directories:
 	@mkdir -p $(TMPDIR)
-	@mkdir -p $(PLTDIR)
 	@mkdir -p $(RESDIR)
 
 #Clean only Objecst
 clean:
 	@$(RM) -rf $(TMPDIR)
-	@$(RM) -rf $(PLTDIR)
 	@$(RM) -rf $(RESDIR)
 
 .PHONY: clean directories
