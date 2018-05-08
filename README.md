@@ -14,6 +14,7 @@ and test [Zipf's law](https://en.wikipedia.org/wiki/Zipf%27s_law) on the two mos
 * matplotlib
 * Make
 * Snakemake
+* (optional) Docker
 
 ### Usage
 
