@@ -22,6 +22,8 @@ RUN yes | pip3 install numpy
 RUN yes | pip3 install matplotlib
 RUN yes | pip3 install snakemake
 
+# create symlink from python3 to python
+RUN ln -s $(which python3) /usr/bin/python
 
 # copy project to container 
 COPY ./ /opt/word_count/
