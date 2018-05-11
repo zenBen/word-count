@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 from wordcount import load_word_counts
 import sys
 
