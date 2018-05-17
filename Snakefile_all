@@ -1,27 +1,26 @@
-# This is a "hidden" version of the final Snakefile if students want/need 
-# to run the instructor's copy.
-
-# our zipf analysis pipeline
+# a list of all the books we are analyzing
 DATA = glob_wildcards('data/{book}.txt').book
 
+# this is for running on HPC resources
 localrules: all, clean, make_archive
 
+# the default rule
 rule all:
     input:
         'zipf_analysis.tar.gz'
 
 # delete everything so we can re-run things
-# deletes a little extra for purposes of lesson prep
 rule clean:
-    shell:  
+    shell:
         '''
         rm -rf source/__pycache__
-        rm -f zipf_analysis.tar.gz processed_data/* results/* 
+        rm -f zipf_analysis.tar.gz processed_data/* results/*
         '''
 
-# count words in one of our "books"
+# count words in one of our books
+# logfiles from each run are put in .log files"
 rule count_words:
-    input:  
+    input:
         wc='source/wordcount.py',
         book='data/{file}.txt'
     output: 'processed_data/{file}.dat'
@@ -34,17 +33,18 @@ rule count_words:
         '''
 
 # create a plot for each book
+# shows example usage of the resources keyword
 rule make_plot:
     input:
         plotcount='source/plotcount.py',
-        book='processed_data/{file}.dat'
+	book='processed_data/{file}.dat'
     output: 'results/{file}.png'
     resources: gpu=1
     shell: 'python {input.plotcount} {input.book} {output}'
 
 # generate summary table
 rule zipf_test:
-    input:  
+    input:
         zipf='source/zipf_test.py',
         books=expand('processed_data/{book}.dat', book=DATA)
     output: 'results/results.txt'
@@ -58,4 +58,3 @@ rule make_archive:
         'results/results.txt'
     output: 'zipf_analysis.tar.gz'
     shell: 'tar -czvf {output} {input}'
-
