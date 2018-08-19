@@ -8,19 +8,23 @@ LABEL maintainer="kthw@kth.se"
 RUN apt-get update
 RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:jonathonf/python-3.6
-RUN apt-get update
+RUN apt-get update && apt-get -y install locales
 
-# install make
-RUN apt-get install -y build-essential
 
-# install nano
-RUN apt-get install -y nano
+# install make and nano
+RUN apt-get install -y build-essential && apt-get install -y nano
 
 # install python
 RUN apt-get install -y python3.6 python3.6-dev python3-pip python3.6-venv
 RUN yes | pip3 install numpy
 RUN yes | pip3 install matplotlib
 RUN yes | pip3 install snakemake
+
+# unicode locale 
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
 
 # create symlink from python3 to python
 RUN ln -s $(which python3) /usr/bin/python
