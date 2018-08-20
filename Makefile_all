@@ -10,13 +10,13 @@ DATA = $(patsubst $(SRCDIR)/%.txt,$(TMPDIR)/%.dat,$(SRCS))
 
 all: $(OBJS)
 
-$(TMPDIR)/%.dat: $(SRCDIR)/%.txt
+$(TMPDIR)/%.dat: $(SRCDIR)/%.txt source/wordcount.py
 	python source/wordcount.py $<  $@
 
-$(RESDIR)/%.png: $(TMPDIR)/%.dat
+$(RESDIR)/%.png: $(TMPDIR)/%.dat source/plotcount.py
 	python source/plotcount.py $<  $@
 
-$(RESDIR)/results.txt: $(DATA)
+$(RESDIR)/results.txt: $(DATA) source/zipf_test.py
 	python source/zipf_test.py $^ > $@
 
 clean:

@@ -17,7 +17,6 @@ def plot_word_counts(counts, limit=10):
     count_data = [count for (_, count, _) in limited_counts]
     position = np.arange(len(word_data))
     width = 1.0
-#    ax = plt.axes()
     ax = plt.gca()
     ax.set_xticks(position + (width / 2))
     ax.set_xticklabels(word_data)
@@ -54,18 +53,18 @@ def get_ascii_bars(values, truncate=True, maxlen=10, symbol='#'):
         minimum = min(values) - 1
     else:
         minimum = 0
-    
+
     # Type conversion to floats is required for compatibility with python 2,
     # because it doesn't do integer division correctly (it does floor divison
     # for integers).
-    value_range=float(maximum - minimum)
+    value_range = float(maximum - minimum)
     prop_values = [(float(value - minimum) / value_range) for value in values]
-    
+
     # Type conversion to int required for compatibility with python 2
     biggest_bar = symbol * int(round(maxlen / len(symbol)))
     bars = [biggest_bar[:int(round(prop * len(biggest_bar)))]
             for prop in prop_values]
-    
+
     return bars
 
 
