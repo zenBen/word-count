@@ -3,3 +3,7 @@ matplotlib
 
 # to check python code style
 pycodestyle
+
+# to build documentation locally
+sphinx
+sphinx_rtd_theme
