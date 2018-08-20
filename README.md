@@ -20,5 +20,4 @@ and test [Zipf's law](https://en.wikipedia.org/wiki/Zipf%27s_law) on the two mos
 
 * Clone the repository
 * Run make and/or snakemake
-* Results will be generated in `plots/` sub-folder and the `results.txt` file
- 
+* Results will be written into the `results` folder.
