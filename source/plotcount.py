@@ -57,7 +57,7 @@ def get_ascii_bars(values, truncate=True, maxlen=10, symbol='#'):
     # Type conversion to floats is required for compatibility with python 2,
     # because it doesn't do integer division correctly (it does floor divison
     # for integers).
-    value_range=float(maximum - minimum)
+    value_range = float(maximum - minimum)
     prop_values = [(float(value - minimum) / value_range) for value in values]
 
     # Type conversion to int required for compatibility with python 2

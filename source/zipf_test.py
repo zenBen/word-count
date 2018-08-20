@@ -19,4 +19,5 @@ if __name__ == '__main__':
         counts = load_word_counts(input_file)
         [first, second] = top_two_word(counts)
         bookname = input_file[:-4].split("/")[-1]
-        print("%s\t%i\t%i\t%.2f" %(bookname, first, second, float(first)/second))
+        print("%s\t%i\t%i\t%.2f" % (bookname, first, second,
+                                    float(first)/second))
