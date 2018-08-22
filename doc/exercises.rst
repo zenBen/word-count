@@ -7,7 +7,7 @@ Before you start
 ----------------
 
 - Discuss the exercise idea with the classroom.
-- Distribute exercises among groups of 2-3.
+- Distribute exercises among groups of 2-3 persons.
 - Open a GitHub issue and inform the community about the problem and how you
   plan to solve it. Discuss why we do this.
 - Fork this project.
