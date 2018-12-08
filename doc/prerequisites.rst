@@ -1,0 +1,8 @@
+Prerequisites
+=============
+
+Software
+--------
+- Snakemake
+- Python
+

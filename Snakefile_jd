@@ -1,0 +1,29 @@
+rule alldata:
+     input:  'results/results.txt' 
+
+# Count words for isles.
+rule count_words_isles:
+     input:  'data/isles.txt','source/wordcount.py'
+     output: 'processed_data/isles.dat'
+     shell:  'python source/wordcount.py data/isles.txt processed_data/isles.dat'
+
+rule count_words_abyss:
+     input:  'data/abyss.txt','source/wordcount.py'
+     output: 'processed_data/abyss.dat'
+     shell:  'python source/wordcount.py data/abyss.txt processed_data/abyss.dat'
+
+rule count_words_last:
+     input:  'data/last.txt','source/wordcount.py'
+     output: 'processed_data/last.dat'
+     shell:  'python source/wordcount.py data/last.txt processed_data/last.dat'
+
+rule results:
+     input:  'source/zipf_test.py',
+	     'processed_data/isles.dat',
+             'processed_data/abyss.dat', 
+             'processed_data/last.dat'
+     output: 'results/results.txt'
+     shell:  'python {input[0]} {input[1]} {input[2]} {input[3]} > {output}'
+
+rule clean:
+    shell: 'rm -f processed_data/*.dat; rm -f results/results.txt'

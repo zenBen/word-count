@@ -1,0 +1,19 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	count_words
+	1
+
+[Wed Dec  5 09:41:29 2018]
+rule count_words:
+    input: data/isles.txt
+    output: processed_data/isles.dat
+    jobid: 0
+
+[Wed Dec  5 09:41:29 2018]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: /Users/jacda119/git/coderefinery/word-count/.snakemake/log/2018-12-05T094129.088414.snakemake.log

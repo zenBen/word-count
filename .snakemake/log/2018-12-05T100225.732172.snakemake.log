@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 1 of /Users/jacda119/git/coderefinery/word-count/Snakefile_jd:
+Missing input files for rule results:
+processed_data/*.dat
