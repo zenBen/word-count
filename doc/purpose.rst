@@ -3,10 +3,10 @@
 Purpose
 =======
 
-Write me ...
+The purpose of this excercise is to test readthedocs webhooks and show how easy it is to make an efficient documentation.
 
 
 Zipf's law
 ----------
 
-Write me ...
+This is some weird word count stuff that I don't really get at this point. 
